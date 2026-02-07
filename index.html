@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinAnalytics Pro</title>
+    <link rel="stylesheet" href="style.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-wrapper">
+        <header class="main-header">
+            <div class="header-left">
+                <h1>FinAnalytics <span class="badge">Pro</span></h1>
+                <p id="user-welcome">Welcome back!</p>
+            </div>
+            <div class="header-right">
+                <div class="balance-card">
+                    <small>Net Balance</small>
+                    <h2 id="balance">$0.00</h2>
+                </div>
+                <button id="logout-btn" class="logout-pill">Logout 🚪</button>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <aside class="action-sidebar">
+                <div class="glass-card">
+                    <h3>New Transaction</h3>
+                    <form id="transaction-form">
+                        <div class="input-group">
+                            <label>Description</label>
+                            <input type="text" id="description" placeholder="What was this for?" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Category</label>
+                            <select id="category" required>
+                                <option value="Salary">💰 Salary</option>
+                                <option value="Food">🍔 Food</option>
+                                <option value="Rent">🏠 Rent</option>
+                                <option value="Shopping">🛍️ Shopping</option>
+                                <option value="Travel">✈️ Travel</option>
+                                <option value="Others">📦 Others</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Amount</label>
+                            <input type="number" id="amount" placeholder="0.00" step="0.01" min="0.01" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Transaction Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Type</label>
+                            <select id="type" required>
+                                <option value="income">Credit (+)</option>
+                                <option value="expense">Debit (-)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">Confirm Transaction</button>
+                    </form>
+                </div>
+            </aside>
+
+            <section class="display-area">
+                <div class="top-cards">
+                    <div class="stat-card income">
+                        <div class="card-icon">↓</div>
+                        <div class="card-val">
+                            <small>Total Income</small>
+                            <p id="total-income">+$0.00</p>
+                        </div>
+                    </div>
+                    <div class="stat-card expense">
+                        <div class="card-icon">↑</div>
+                        <div class="card-val">
+                            <small>Total Expenses</small>
+                            <p id="total-expense">-$0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card chart-container">
+                    <div class="chart-header">
+                        <h3>Financial Insights</h3>
+                        <button id="export-btn" class="export-pill">Export to Excel 📊</button>
+                    </div>
+                    
+                    <div class="charts-flex-container">
+                        <div class="chart-wrapper line-chart-box">
+                            <small>Balance Trend</small>
+                            <canvas id="balanceChart"></canvas>
+                        </div>
+                        <div class="chart-wrapper doughnut-chart-box">
+                            <small>Expense Split</small>
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card list-section">
+                    <h3>Recent Activity</h3>
+                    <ul id="transaction-list"></ul>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>
